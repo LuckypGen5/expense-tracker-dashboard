@@ -16,8 +16,8 @@ export default function Dashboard() {
   const loadData = async () => {
     try {
       const [expenseRes, summaryRes] = await Promise.all([
-        API.get("/expenses"),
-        API.get("/expenses/summary"),
+        API.get("/api/expenses"),
+        API.get("/api/expenses/summary"),
       ]);
       setExpenses(expenseRes.data);
       setSummary(summaryRes.data);
@@ -33,10 +33,10 @@ export default function Dashboard() {
   const handleExpenseSubmit = async (formData) => {
     try {
       if (editingExpense) {
-        await API.put(`/expenses/${editingExpense.id}`, formData);
+        await API.put(`/api/expenses/${editingExpense.id}`, formData);
         setMessage("Expense updated successfully");
       } else {
-        await API.post("/expenses", formData);
+        await API.post("/api/expenses", formData);
         setMessage("Expense added successfully");
       }
       setEditingExpense(null);
